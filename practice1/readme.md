@@ -1,6 +1,7 @@
 # Practice 1
 | 기본적인 환경설정 방법과 변수들을 정리
 
+TODO 1.환경설정을 통해 기본환경 셋팅
 ## 환경설정
 
 + 커맨드라인에 아래와 같이 입력
@@ -29,4 +30,14 @@ npm i @types/typescript # npm install(i는 준말) typescript 타입추가
   },
   "include": ["src"] // Typescript 컴파일위치
 }
+```
++ 컴파일시에는 처리방법
+
+```bash
+
+tsc 파일경로 # js 파일 생성됨
+
+tsx 파일경로 # 즉시 실행됨
+
+
 ```
