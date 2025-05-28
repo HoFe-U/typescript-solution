@@ -1,4 +1,7 @@
-const enum Role {
+/**
+ * Enum 주의사항 => 컴파일된 후의 js 를 보면된다
+ */
+enum Role {
   ADMIN = 0,
   USER = 1,
   GUEST = 2,

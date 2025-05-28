@@ -111,7 +111,7 @@ let unknown2 = unknownValue as string; // unknown은 타입가드(단언)을 사
  * 결론적으로
  * any는 모든 타입으로 다운캐스팅이 가능하지만,
  * unknown은 타입가드를 사용하여 안전하게 다운캐스팅이 가능합니다.
- * never는 절대 할당될 수 없는 타입입니다.
+ * never는 절대 할당될 수 없는 타입입니다.(즉, 절대 실행되지 않는 코드 throw / 무한 루프같은거)
  * 따라서, 타입스크립트에서는 가능한 한 any를 사용하지 않고,
  * unknown과 never를 사용하여 타입 안전성을 높이는 것이 좋습니다.
  */ 
@@ -150,8 +150,8 @@ type Guest = {
 }
 
 /**
- * & => ((A ∩ B))
- * | => ((A ∪ B))
+ * & => ((A ∩ B)) 교집합(intersection)
+ * | => ((A ∪ B)) 합집합(union)
  */
 type UserInfo = User | Admin | Guest; // 유니언 타입
 
@@ -232,7 +232,7 @@ const catDog: CatDog = {
 }
 
 /**
- * interface의 중복선언
+ * interface의 중복선언 (선업 합침)
  */
 
 interface A {
@@ -246,4 +246,32 @@ interface A {
 const a : A = {
   name: "Hofe",
   a: "A"
+}
+
+/**
+ * class 의 사용 예시
+ */
+// class Person {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   greet() {
+//     console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+//   }
+// }
+
+class Person {
+  constructor(private name: string,private age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+  }
 }
