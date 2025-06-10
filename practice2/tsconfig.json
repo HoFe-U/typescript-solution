@@ -4,6 +4,7 @@
     "module": "ESNext", // 모듈시스템을 어떻게할껀지
     "outDir": "dist", // 컴파일된 js 파일이 저장될 디렉토리
     "strict": true,  // 모든 엄격한 타입 검사 옵션을 활성화
+    "noImplicitAny": false,
     // "strictNullChecks": false,
     "moduleDetection": "force",  // 파일을무조건 모듈로처리
     "skipLibCheck": true  // 라이브러리 파일의 타입 검사 건너뛰기
