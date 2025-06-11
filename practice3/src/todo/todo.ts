@@ -5,8 +5,12 @@ import { Expect, Equal } from "../testUtils/utils";
  * => arr 에는 any 말고 특정타입이 들어갈수 있게처리
  */
 
-function map(arr :any , calback : any) {
-
+function map<T,U>(arr : T[], calback : (item :T) => U) {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    result.push(calback(arr[i]));
+  }
+  return result;
 }
 
 const arr = [1,2,3];
@@ -23,14 +27,14 @@ console.log("arrStr : ", convertArrStr);
 
 
 interface Map<V> {
-
+  [key : string] : V;
 }
 
 let stringMap : Map<string> = {
   key : "value"
 }
 
-let booleanMap : Map<string> = {
+let booleanMap : Map<boolean> = {
   key : true
 }
 
@@ -45,11 +49,18 @@ let numberMap : Map<number> = {
  * 식료품점, 식료품상품, 샐러드에대해 아래 테스트를 통과할수있게 해주세요
  * 
  */
-type GroceryStore = any
+type GroceryStore<T,V> = {
+  name : T;
+  city : V;
+}
 
-type GroceryItem = any
+type GroceryItem<T1, T2, T3> = {
+  name : T1;
+  price : T2;
+  inStock : T3;
+}
 
-type Salad = any;
+type Salad = GroceryItem<"Caprese Salad", 14.99, true>
 
 type test_SaladName = Expect<Equal<
   Salad['name'],
@@ -68,7 +79,7 @@ type test_SaladInStock = Expect<Equal<
 
 type test_KrogerDetroit = Expect<Equal<
   GroceryStore<'이런저런마트', '부산'>,
-  { name: 'Kroger', city: 'Detroit' }
+  { name: '이런저런마트', city: '부산' }
 >>;
 
 type test_StopNShopMassachusetts = Expect<Equal<
