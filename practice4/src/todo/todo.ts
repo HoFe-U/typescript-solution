@@ -50,8 +50,8 @@ type readOnlyCases = [
 type Pick<T, K> = any;
 
 type pickCases = [
-  Expect<Equal<Pick<Post, 'title'>, { title: string }>>,
-  Expect<Equal<Pick<Post, 'title' | 'content'>, { title: string; content: string }>>,
+  Expect<Equal<Pick<Post, 'title'>, { readonly title: string }>>,
+  Expect<Equal<Pick<Post, 'title' | 'content'>, { readonly title: string; content: string }>>,
   Expect<Equal<Pick<Post, 'tags'>, { tags: string[] }>>
 ];
 /**
