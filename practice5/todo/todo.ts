@@ -59,9 +59,6 @@ type ReadOnlyUser =/* 여기에 알맞은 타입을 작성 */;
 const readUser: ReadOnlyUser = {
   id :1,
   name : "읽기전용유저",
-  modifyUser(user) {
-    console.log(user);
-  }
 }
 
 /**
