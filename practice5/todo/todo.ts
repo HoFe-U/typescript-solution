@@ -34,7 +34,7 @@ function getUserInfo() {
  * name 속성만
  * hint : Partial + ?
  */
-function updateUser(user: User, updates: /* 여기에 알맞은 타입 작성 */): User {
+function updateUser(user: User, updates: Pick<Partial<User>,'name'>): User {
   return { ...user, ...updates };
 }
 
@@ -42,7 +42,7 @@ function updateUser(user: User, updates: /* 여기에 알맞은 타입 작성 */
  * TODO 2 : 모든 프로퍼티가 필수인 user 를 정의 하고 아래를 작성하세요
  * hint : Required
  */
-type FullUser = /* 여기에 알맞은 타입 작성 */;
+type FullUser = Required<User>
 
 const fullUser: FullUser = {
   id: 1,
@@ -54,7 +54,7 @@ const fullUser: FullUser = {
  * TODO 3: 읽기 전용 사용자를 정의하고 아래 내용이 수정될수 없는지를 확인햅주세요
  * hint : ReadOnly
  */
-type ReadOnlyUser =/* 여기에 알맞은 타입을 작성 */;
+type ReadOnlyUser = Readonly<User>;
 
 const readUser: ReadOnlyUser = {
   id :1,
@@ -67,7 +67,7 @@ const readUser: ReadOnlyUser = {
  */
 type UserRoles = "admin" | "user" | "guest"
 
-const roleUsers : /* 여기에 알맞은 타입을 작성 */ = {
+const roleUsers : Record<UserRoles, User> = {
   admin : new MyUser(1,"관리자"),
   user : new MyUser(2,"일반사용자"),
   guest : new MyUser(3,"게스트")
@@ -78,7 +78,7 @@ const roleUsers : /* 여기에 알맞은 타입을 작성 */ = {
  * hint : Pick
  */
 
-type PickUserNickname = /* 여기에 알맞은 타입을 작성 */;
+type PickUserNickname = Pick<Required<User>,'nickName'>;
 
 const pickUser : PickUserNickname={
   nickName : "hofeU"
@@ -89,14 +89,14 @@ const pickUser : PickUserNickname={
  * hint : Exclude
  */
 
-type ExcludeUserRoles = ;
+type ExcludeUserRoles = Exclude<UserRoles,'admin'>;
 
 /**
  * TODO 7 : UserRoles 에서 admin 권한만 추출하려면?
  * hint : Extract
  */
 
-type ExtractUserRole = ;
+type ExtractUserRole = Extract<UserRoles,'admin'>;
 
 /**
  * TODO 8 : getUserInfo 에서 token 값을 제외하여 리턴값을 기반으로 타입으로 
@@ -104,7 +104,7 @@ type ExtractUserRole = ;
  * hint : ReturnType + ?
  */
 
-type UserInfo = /* 여기에 알맞은 타입을 작성 */;
+type UserInfo = Omit<ReturnType<typeof getUserInfo>,'token'>
 
 const user : UserInfo = {
   id : 2,
